@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9debb20a03e7453483029c8c53558ef2" Name="Diagram1" ZoomLevel="100">
+        <EntityTypeShape EntityType="InformationTechnologyCircleModel.Administrator" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationTechnologyCircleModel.AutorizationStaff" Width="1.5" PointX="6.5" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationTechnologyCircleModel.AutorizationUser" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationTechnologyCircleModel.ExtracurricularActivities" Width="1.5" PointX="6" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationTechnologyCircleModel.GeneralManager" Width="1.5" PointX="13" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationTechnologyCircleModel.Staff" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationTechnologyCircleModel.sysdiagrams" Width="1.5" PointX="12" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationTechnologyCircleModel.Teacher" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationTechnologyCircleModel.User" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <AssociationConnector Association="InformationTechnologyCircleModel.FK_Administrator_User" ManuallyRouted="false" />
+        <AssociationConnector Association="InformationTechnologyCircleModel.FK_Staff_Administrator" ManuallyRouted="false" />
+        <AssociationConnector Association="InformationTechnologyCircleModel.FK_AutorizationStaff_Staff" ManuallyRouted="false" />
+        <AssociationConnector Association="InformationTechnologyCircleModel.FK_AutorizationUser_User" ManuallyRouted="false" />
+        <AssociationConnector Association="InformationTechnologyCircleModel.FK_AutorizationUser_User1" ManuallyRouted="false" />
+        <AssociationConnector Association="InformationTechnologyCircleModel.FK_AutorizationUser_User2" ManuallyRouted="false" />
+        <AssociationConnector Association="InformationTechnologyCircleModel.FK_ExtracurricularActivities_Teacher" ManuallyRouted="true" >
+          <ConnectorPoint PointX="4.5" PointY="1.90625" />
+          <ConnectorPoint PointX="5.4479139166666668" PointY="1.9062499999999993" />
+          <ConnectorPoint PointX="5.6145805833333329" PointY="1.90625" />
+          <ConnectorPoint PointX="8.7339012920856476" PointY="1.90625" />
+          <ConnectorPoint PointX="8.7339012920856476" PointY="7.781940625" />
+          <ConnectorPoint PointX="7.46875" PointY="7.781940625" />
+          <ConnectorPoint PointX="7.46875" PointY="8.5" />
+        </AssociationConnector>
+        <AssociationConnector Association="InformationTechnologyCircleModel.FK_ExtracurricularActivities_User" ManuallyRouted="false" />
+        <AssociationConnector Association="InformationTechnologyCircleModel.FK_GeneralManager_Staff" ManuallyRouted="false" />
+        <AssociationConnector Association="InformationTechnologyCircleModel.FK_Staff_Teacher" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

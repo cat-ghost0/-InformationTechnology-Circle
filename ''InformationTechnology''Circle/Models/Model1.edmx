@@ -1,0 +1,704 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище InformationTechnologyCircleModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Administrator">
+          <Key>
+            <PropertyRef Name="ID_AD" />
+          </Key>
+          <Property Name="ID_AD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Fname" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="Change" Type="int" Nullable="false" />
+          <Property Name="Salary" Type="money" Nullable="false" />
+          <Property Name="User" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AutorizationStaff">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Staff" Type="int" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AutorizationUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="int" Nullable="false" />
+          <Property Name="UserSurname" Type="int" Nullable="false" />
+          <Property Name="UserFname" Type="int" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExtracurricularActivities">
+          <Key>
+            <PropertyRef Name="ID_EA" />
+          </Key>
+          <Property Name="ID_EA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Specialization" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Teacher" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Time" Type="datetime" Nullable="false" />
+          <Property Name="Class" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="User" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GeneralManager">
+          <Key>
+            <PropertyRef Name="ID_GM" />
+          </Key>
+          <Property Name="ID_GM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Staff" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="ID_S" />
+          </Key>
+          <Property Name="ID_S" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Administrator" Type="int" Nullable="false" />
+          <Property Name="Teacher" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="ID_T" />
+          </Key>
+          <Property Name="ID_T" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Fname" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="Change" Type="int" Nullable="false" />
+          <Property Name="Salary" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID_U" />
+          </Key>
+          <Property Name="ID_U" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Fname" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Sex" Type="bit" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="PasspNumber" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="PasspOrg" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PasspDate" Type="date" Nullable="false" />
+          <Property Name="INN" Type="nvarchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Administrator_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Administrator" Type="Self.Administrator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_U" />
+            </Principal>
+            <Dependent Role="Administrator">
+              <PropertyRef Name="User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AutorizationStaff_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="AutorizationStaff" Type="Self.AutorizationStaff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="ID_S" />
+            </Principal>
+            <Dependent Role="AutorizationStaff">
+              <PropertyRef Name="Staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AutorizationUser_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="AutorizationUser" Type="Self.AutorizationUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_U" />
+            </Principal>
+            <Dependent Role="AutorizationUser">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AutorizationUser_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="AutorizationUser" Type="Self.AutorizationUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_U" />
+            </Principal>
+            <Dependent Role="AutorizationUser">
+              <PropertyRef Name="UserSurname" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AutorizationUser_User2">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="AutorizationUser" Type="Self.AutorizationUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_U" />
+            </Principal>
+            <Dependent Role="AutorizationUser">
+              <PropertyRef Name="UserFname" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExtracurricularActivities_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="ExtracurricularActivities" Type="Self.ExtracurricularActivities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="ID_T" />
+            </Principal>
+            <Dependent Role="ExtracurricularActivities">
+              <PropertyRef Name="Teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExtracurricularActivities_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ExtracurricularActivities" Type="Self.ExtracurricularActivities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_U" />
+            </Principal>
+            <Dependent Role="ExtracurricularActivities">
+              <PropertyRef Name="User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GeneralManager_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="GeneralManager" Type="Self.GeneralManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="ID_S" />
+            </Principal>
+            <Dependent Role="GeneralManager">
+              <PropertyRef Name="Staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Administrator">
+          <End Role="Administrator" Type="Self.Administrator" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Administrator">
+              <PropertyRef Name="ID_AD" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="Administrator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="ID_T" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="Teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище InformationTechnologyCircleModelContainer">
+          <EntitySet Name="Administrator" EntityType="Self.Administrator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AutorizationStaff" EntityType="Self.AutorizationStaff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AutorizationUser" EntityType="Self.AutorizationUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExtracurricularActivities" EntityType="Self.ExtracurricularActivities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GeneralManager" EntityType="Self.GeneralManager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Administrator_User" Association="Self.FK_Administrator_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Administrator" EntitySet="Administrator" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AutorizationStaff_Staff" Association="Self.FK_AutorizationStaff_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="AutorizationStaff" EntitySet="AutorizationStaff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AutorizationUser_User" Association="Self.FK_AutorizationUser_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="AutorizationUser" EntitySet="AutorizationUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AutorizationUser_User1" Association="Self.FK_AutorizationUser_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="AutorizationUser" EntitySet="AutorizationUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AutorizationUser_User2" Association="Self.FK_AutorizationUser_User2">
+            <End Role="User" EntitySet="User" />
+            <End Role="AutorizationUser" EntitySet="AutorizationUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExtracurricularActivities_Teacher" Association="Self.FK_ExtracurricularActivities_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="ExtracurricularActivities" EntitySet="ExtracurricularActivities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExtracurricularActivities_User" Association="Self.FK_ExtracurricularActivities_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="ExtracurricularActivities" EntitySet="ExtracurricularActivities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GeneralManager_Staff" Association="Self.FK_GeneralManager_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="GeneralManager" EntitySet="GeneralManager" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Administrator" Association="Self.FK_Staff_Administrator">
+            <End Role="Administrator" EntitySet="Administrator" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Teacher" Association="Self.FK_Staff_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InformationTechnologyCircleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Administrator">
+          <Key>
+            <PropertyRef Name="ID_AD" />
+          </Key>
+          <Property Name="ID_AD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Change" Type="Int32" Nullable="false" />
+          <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="User" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_Administrator_User" FromRole="Administrator" ToRole="User" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Staff_Administrator" FromRole="Administrator" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="AutorizationStaff">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Staff" Type="Int32" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Staff1" Relationship="Self.FK_AutorizationStaff_Staff" FromRole="AutorizationStaff" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="AutorizationUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="Int32" Nullable="false" />
+          <Property Name="UserSurname" Type="Int32" Nullable="false" />
+          <Property Name="UserFname" Type="Int32" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_AutorizationUser_User" FromRole="AutorizationUser" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_AutorizationUser_User1" FromRole="AutorizationUser" ToRole="User" />
+          <NavigationProperty Name="User2" Relationship="Self.FK_AutorizationUser_User2" FromRole="AutorizationUser" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ExtracurricularActivities">
+          <Key>
+            <PropertyRef Name="ID_EA" />
+          </Key>
+          <Property Name="ID_EA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Specialization" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Teacher" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Class" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="User" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Teacher1" Relationship="Self.FK_ExtracurricularActivities_Teacher" FromRole="ExtracurricularActivities" ToRole="Teacher" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_ExtracurricularActivities_User" FromRole="ExtracurricularActivities" ToRole="User" />
+        </EntityType>
+        <EntityType Name="GeneralManager">
+          <Key>
+            <PropertyRef Name="ID_GM" />
+          </Key>
+          <Property Name="ID_GM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Staff" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Staff1" Relationship="Self.FK_GeneralManager_Staff" FromRole="GeneralManager" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="ID_S" />
+          </Key>
+          <Property Name="ID_S" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Administrator" Type="Int32" Nullable="false" />
+          <Property Name="Teacher" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Administrator1" Relationship="Self.FK_Staff_Administrator" FromRole="Staff" ToRole="Administrator" />
+          <NavigationProperty Name="AutorizationStaff" Relationship="Self.FK_AutorizationStaff_Staff" FromRole="Staff" ToRole="AutorizationStaff" />
+          <NavigationProperty Name="GeneralManager" Relationship="Self.FK_GeneralManager_Staff" FromRole="Staff" ToRole="GeneralManager" />
+          <NavigationProperty Name="Teacher1" Relationship="Self.FK_Staff_Teacher" FromRole="Staff" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="ID_T" />
+          </Key>
+          <Property Name="ID_T" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Change" Type="Int32" Nullable="false" />
+          <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="ExtracurricularActivities" Relationship="Self.FK_ExtracurricularActivities_Teacher" FromRole="Teacher" ToRole="ExtracurricularActivities" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Staff_Teacher" FromRole="Teacher" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID_U" />
+          </Key>
+          <Property Name="ID_U" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sex" Type="Boolean" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasspNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasspOrg" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasspDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="INN" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Administrator" Relationship="Self.FK_Administrator_User" FromRole="User" ToRole="Administrator" />
+          <NavigationProperty Name="AutorizationUser" Relationship="Self.FK_AutorizationUser_User" FromRole="User" ToRole="AutorizationUser" />
+          <NavigationProperty Name="AutorizationUser1" Relationship="Self.FK_AutorizationUser_User1" FromRole="User" ToRole="AutorizationUser" />
+          <NavigationProperty Name="AutorizationUser2" Relationship="Self.FK_AutorizationUser_User2" FromRole="User" ToRole="AutorizationUser" />
+          <NavigationProperty Name="ExtracurricularActivities" Relationship="Self.FK_ExtracurricularActivities_User" FromRole="User" ToRole="ExtracurricularActivities" />
+        </EntityType>
+        <Association Name="FK_Administrator_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Administrator" Type="Self.Administrator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_U" />
+            </Principal>
+            <Dependent Role="Administrator">
+              <PropertyRef Name="User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Administrator">
+          <End Role="Administrator" Type="Self.Administrator" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Administrator">
+              <PropertyRef Name="ID_AD" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="Administrator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AutorizationStaff_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="AutorizationStaff" Type="Self.AutorizationStaff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="ID_S" />
+            </Principal>
+            <Dependent Role="AutorizationStaff">
+              <PropertyRef Name="Staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AutorizationUser_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="AutorizationUser" Type="Self.AutorizationUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_U" />
+            </Principal>
+            <Dependent Role="AutorizationUser">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AutorizationUser_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="AutorizationUser" Type="Self.AutorizationUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_U" />
+            </Principal>
+            <Dependent Role="AutorizationUser">
+              <PropertyRef Name="UserSurname" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AutorizationUser_User2">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="AutorizationUser" Type="Self.AutorizationUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_U" />
+            </Principal>
+            <Dependent Role="AutorizationUser">
+              <PropertyRef Name="UserFname" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExtracurricularActivities_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="ExtracurricularActivities" Type="Self.ExtracurricularActivities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="ID_T" />
+            </Principal>
+            <Dependent Role="ExtracurricularActivities">
+              <PropertyRef Name="Teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExtracurricularActivities_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ExtracurricularActivities" Type="Self.ExtracurricularActivities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_U" />
+            </Principal>
+            <Dependent Role="ExtracurricularActivities">
+              <PropertyRef Name="User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GeneralManager_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="GeneralManager" Type="Self.GeneralManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="ID_S" />
+            </Principal>
+            <Dependent Role="GeneralManager">
+              <PropertyRef Name="Staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="ID_T" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="Teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InformationTechnologyCircleEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Administrator" EntityType="Self.Administrator" />
+          <EntitySet Name="AutorizationStaff" EntityType="Self.AutorizationStaff" />
+          <EntitySet Name="AutorizationUser" EntityType="Self.AutorizationUser" />
+          <EntitySet Name="ExtracurricularActivities" EntityType="Self.ExtracurricularActivities" />
+          <EntitySet Name="GeneralManager" EntityType="Self.GeneralManager" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_Administrator_User" Association="Self.FK_Administrator_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Administrator" EntitySet="Administrator" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Administrator" Association="Self.FK_Staff_Administrator">
+            <End Role="Administrator" EntitySet="Administrator" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AutorizationStaff_Staff" Association="Self.FK_AutorizationStaff_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="AutorizationStaff" EntitySet="AutorizationStaff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AutorizationUser_User" Association="Self.FK_AutorizationUser_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="AutorizationUser" EntitySet="AutorizationUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AutorizationUser_User1" Association="Self.FK_AutorizationUser_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="AutorizationUser" EntitySet="AutorizationUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AutorizationUser_User2" Association="Self.FK_AutorizationUser_User2">
+            <End Role="User" EntitySet="User" />
+            <End Role="AutorizationUser" EntitySet="AutorizationUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExtracurricularActivities_Teacher" Association="Self.FK_ExtracurricularActivities_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="ExtracurricularActivities" EntitySet="ExtracurricularActivities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExtracurricularActivities_User" Association="Self.FK_ExtracurricularActivities_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="ExtracurricularActivities" EntitySet="ExtracurricularActivities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GeneralManager_Staff" Association="Self.FK_GeneralManager_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="GeneralManager" EntitySet="GeneralManager" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Teacher" Association="Self.FK_Staff_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище InformationTechnologyCircleModelContainer" CdmEntityContainer="InformationTechnologyCircleEntities">
+          <EntitySetMapping Name="Administrator">
+            <EntityTypeMapping TypeName="InformationTechnologyCircleModel.Administrator">
+              <MappingFragment StoreEntitySet="Administrator">
+                <ScalarProperty Name="ID_AD" ColumnName="ID_AD" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Change" ColumnName="Change" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="User" ColumnName="User" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AutorizationStaff">
+            <EntityTypeMapping TypeName="InformationTechnologyCircleModel.AutorizationStaff">
+              <MappingFragment StoreEntitySet="AutorizationStaff">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Staff" ColumnName="Staff" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AutorizationUser">
+            <EntityTypeMapping TypeName="InformationTechnologyCircleModel.AutorizationUser">
+              <MappingFragment StoreEntitySet="AutorizationUser">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserSurname" ColumnName="UserSurname" />
+                <ScalarProperty Name="UserFname" ColumnName="UserFname" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExtracurricularActivities">
+            <EntityTypeMapping TypeName="InformationTechnologyCircleModel.ExtracurricularActivities">
+              <MappingFragment StoreEntitySet="ExtracurricularActivities">
+                <ScalarProperty Name="ID_EA" ColumnName="ID_EA" />
+                <ScalarProperty Name="Specialization" ColumnName="Specialization" />
+                <ScalarProperty Name="Teacher" ColumnName="Teacher" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="User" ColumnName="User" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GeneralManager">
+            <EntityTypeMapping TypeName="InformationTechnologyCircleModel.GeneralManager">
+              <MappingFragment StoreEntitySet="GeneralManager">
+                <ScalarProperty Name="ID_GM" ColumnName="ID_GM" />
+                <ScalarProperty Name="Staff" ColumnName="Staff" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staff">
+            <EntityTypeMapping TypeName="InformationTechnologyCircleModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="ID_S" ColumnName="ID_S" />
+                <ScalarProperty Name="Administrator" ColumnName="Administrator" />
+                <ScalarProperty Name="Teacher" ColumnName="Teacher" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="InformationTechnologyCircleModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teacher">
+            <EntityTypeMapping TypeName="InformationTechnologyCircleModel.Teacher">
+              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="ID_T" ColumnName="ID_T" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Change" ColumnName="Change" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="InformationTechnologyCircleModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ID_U" ColumnName="ID_U" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="PasspNumber" ColumnName="PasspNumber" />
+                <ScalarProperty Name="PasspOrg" ColumnName="PasspOrg" />
+                <ScalarProperty Name="PasspDate" ColumnName="PasspDate" />
+                <ScalarProperty Name="INN" ColumnName="INN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

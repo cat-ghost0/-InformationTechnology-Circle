@@ -1,0 +1,38 @@
+﻿<Window x:Class="__InformationTechnology__Circle.Authorization.AuthorizatonWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:__InformationTechnology__Circle.Authorization"
+        mc:Ignorable="d"
+        Title="AuthorizatonWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel
+            VerticalAlignment="Center"
+            Width="200">
+
+            <Label
+                Content="Авторизация"
+                FontSize="18"
+                HorizontalAlignment="Center"/>
+
+            <StackPanel Margin="0 10 0 0">
+                <GroupBox Header="Логин">
+                    <TextBox x:Name="TxbLogin"/>
+                </GroupBox>
+                <GroupBox Header="Пароль">
+                    <PasswordBox x:Name="TxbPassword"
+                       PasswordChar="*"/>
+                </GroupBox>
+
+                <Button
+                    x:Name="BtnAuth"
+                    Content="Войти"
+                    Margin="0 10 0 0"
+                    Click="BtnAuth_Click"
+                   
+                />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
